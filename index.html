@@ -1,200 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registro de Iluminación Perimetral</title>
+fetch("https://script.google.com/macros/s/AKfycbyfUKC3SGPkideY9P8suvd4Gk2bJOH8mBWGPDaAgo94t8BClsVyZFUr81J3WDg8C0bUjw/exec", {
 
-<style>
+```
+method: "POST",
 
-body{
-    font-family: Arial, sans-serif;
-    background:#f4f4f4;
-    padding:20px;
-}
+headers: {
+    "Content-Type": "application/json"
+},
 
-h1{
-    text-align:center;
-    color:#333;
-}
+body: JSON.stringify({
 
-form{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    max-width:900px;
-    margin:auto;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
+    ubicacion: document.getElementById("ubicacion").value,
+    tipo: document.getElementById("tipo").value,
+    potencia: document.getElementById("potencia").value,
+    estado: document.getElementById("estado").value,
+    enciende: document.getElementById("enciende").value,
+    parpadeo: document.getElementById("parpadeo").value,
+    danio: document.getElementById("danio").value,
+    sustitucion: document.getElementById("sustitucion").value,
+    mantenimiento: document.getElementById("mantenimiento").value,
+    observaciones: document.getElementById("observaciones").value,
+    responsable: document.getElementById("responsable").value
 
-.grupo{
-    margin-bottom:15px;
-}
+})
+```
 
-label{
-    font-weight:bold;
-    display:block;
-    margin-bottom:5px;
-}
+})
 
-input, select, textarea{
-    width:100%;
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
+.then(response => response.text())
 
-button{
-    background:#007BFF;
-    color:white;
-    padding:12px;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    width:100%;
-    font-size:16px;
-}
+.then(data => {
 
-button:hover{
-    background:#0056b3;
-}
+```
+console.log(data);
 
-</style>
-</head>
+alert("Datos enviados correctamente");
+```
 
-<body>
+})
 
-<h1>Hoja de Verificación de Iluminación</h1>
+.catch(error => {
 
-<form id="formulario">
+```
+console.error(error);
 
-    <div class="grupo">
-        <label>Ubicación</label>
-        <input type="text" id="ubicacion" required>
-    </div>
-
-    <div class="grupo">
-        <label>Tipo de luminaria</label>
-        <input type="text" id="tipo">
-    </div>
-
-    <div class="grupo">
-        <label>Potencia (W)</label>
-        <input type="number" id="potencia">
-    </div>
-
-    <div class="grupo">
-        <label>Estado actual</label>
-        <select id="estado">
-            <option>Bueno</option>
-            <option>Regular</option>
-            <option>Malo</option>
-        </select>
-    </div>
-
-    <div class="grupo">
-        <label>¿Enciende correctamente?</label>
-        <select id="enciende">
-            <option>Sí</option>
-            <option>No</option>
-        </select>
-    </div>
-
-    <div class="grupo">
-        <label>¿Presenta parpadeo?</label>
-        <select id="parpadeo">
-            <option>No</option>
-            <option>Sí</option>
-        </select>
-    </div>
-
-    <div class="grupo">
-        <label>¿Daño físico visible?</label>
-        <select id="danio">
-            <option>No</option>
-            <option>Sí</option>
-        </select>
-    </div>
-
-    <div class="grupo">
-        <label>¿Requiere sustitución?</label>
-        <select id="sustitucion">
-            <option>No</option>
-            <option>Sí</option>
-        </select>
-    </div>
-
-    <div class="grupo">
-        <label>Tipo de mantenimiento</label>
-        <select id="mantenimiento">
-            <option>Preventivo</option>
-            <option>Correctivo</option>
-        </select>
-    </div>
-
-    <div class="grupo">
-        <label>Observaciones</label>
-        <textarea id="observaciones"></textarea>
-    </div>
-
-    <div class="grupo">
-        <label>Responsable</label>
-        <input type="text" id="responsable">
-    </div>
-
-    <button type="submit">Enviar Registro</button>
-
-</form>
-
-<script>
-
-document.getElementById("formulario").addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    fetch("https://script.google.com/macros/s/AKfycbyfUKC3SGPkideY9P8suvd4Gk2bJOH8mBWGPDaAgo94t8BClsVyZFUr81J3WDg8C0bUjw/exec", {
-
-        method: "POST",
-
-        body: JSON.stringify({
-
-            ubicacion: document.getElementById("ubicacion").value,
-            tipo: document.getElementById("tipo").value,
-            potencia: document.getElementById("potencia").value,
-            estado: document.getElementById("estado").value,
-            enciende: document.getElementById("enciende").value,
-            parpadeo: document.getElementById("parpadeo").value,
-            danio: document.getElementById("danio").value,
-            sustitucion: document.getElementById("sustitucion").value,
-            mantenimiento: document.getElementById("mantenimiento").value,
-            observaciones: document.getElementById("observaciones").value,
-            responsable: document.getElementById("responsable").value
-
-        })
-
-    })
-
-    .then(response => response.text())
-
-    .then(data => {
-
-        alert("Datos enviados correctamente");
-
-        document.getElementById("formulario").reset();
-
-    })
-
-    .catch(error => {
-
-        alert("Error al enviar datos");
-
-        console.error(error);
-
-    });
+alert(error);
+```
 
 });
-
-</script>
-
-</body>
-</html>
